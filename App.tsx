@@ -5,38 +5,38 @@
  *
  * @format
  */
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-import React, {useEffect, useRef, useState} from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  Linking,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
+import Home from './src/screens/Home';
+import {createStackNavigator} from '@react-navigation/stack';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import Splash from './src/screens/Splash';
+type RootTypeParamsList = {
+  Home: undefined;
+  Splash: undefined;
+};
+const Stack = createStackNavigator<RootTypeParamsList>();
+export type MainStackType = NativeStackScreenProps<RootTypeParamsList>;
+function MainStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Splash"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  );
+}
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  const [ImageSource, setImageSource] = useState('');
-  const [showCamera, setShowCamera] = useState(true);
-
   return (
-    <SafeAreaView>
-      <View className="flex justify-center items-center ">
-        <Text className="font-bold text-2xl text-slate-700 m-4">
-          Bonjour et je teste native wind
-        </Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
   );
 }
 

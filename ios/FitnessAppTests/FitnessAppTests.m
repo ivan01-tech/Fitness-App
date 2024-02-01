@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface AwesomeProjectA1Tests : XCTestCase
+@interface FitnessAppTests : XCTestCase
 
 @end
 
-@implementation AwesomeProjectA1Tests
+@implementation FitnessAppTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {
