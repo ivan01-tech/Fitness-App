@@ -13,12 +13,19 @@ import Home from './src/screens/Home';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Splash from './src/screens/Splash';
+import Exercise from './src/screens/Exercise';
+import {ImageCaroussel} from './src/utils/datasCaroussel';
 type RootTypeParamsList = {
   Home: undefined;
   Splash: undefined;
+  Exercise: ImageCaroussel;
 };
 const Stack = createStackNavigator<RootTypeParamsList>();
 export type MainStackType = NativeStackScreenProps<RootTypeParamsList>;
+export type ExerciseProps = NativeStackScreenProps<
+  RootTypeParamsList,
+  'Exercise'
+>;
 function MainStack() {
   return (
     <Stack.Navigator
@@ -28,6 +35,7 @@ function MainStack() {
       }}>
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Exercise" component={Exercise} />
     </Stack.Navigator>
   );
 }

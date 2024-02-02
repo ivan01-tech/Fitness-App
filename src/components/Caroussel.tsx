@@ -9,7 +9,6 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {View} from 'react-native';
-
 const CarousselComp = () => {
   return (
     <Caroussel
