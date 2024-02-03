@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {FadeIn, FadeInDown, FadeOut} from 'react-native-reanimated';
+import {FadeInDown} from 'react-native-reanimated';
 import {View, Image, Text} from 'react-native';
 import React from 'react';
 import {

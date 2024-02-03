@@ -2,10 +2,13 @@
 import {
   FlatList,
   Image,
+  SafeAreaView,
+  StatusBar,
   ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
+
 import React, {useEffect, useState} from 'react';
 import {ExerciseProps} from '../../App';
 import {
@@ -17,6 +20,7 @@ import {Text} from 'react-native';
 import {getExercises} from '../utils/exerciceservices';
 import {ScrollView} from 'react-native-virtualized-view';
 import CustomModal from '../components/CustomModal';
+import Animated, {FadeInDown} from 'react-native-reanimated';
 const Exercise = ({route, navigation}: ExerciseProps) => {
   const {image, name} = route.params;
   const [bodyPart, setBodyPart] = useState<BodyPartRes[]>([]);
@@ -46,7 +50,8 @@ const Exercise = ({route, navigation}: ExerciseProps) => {
   };
 
   return (
-    <ScrollView>
+    <SafeAreaView>
+      <StatusBar />
       <View
         style={{
           height: heightPercentageToDP('40%'),
@@ -68,7 +73,7 @@ const Exercise = ({route, navigation}: ExerciseProps) => {
       </View>
 
       {/* exercises */}
-      <View className="p-4 w-full">
+      <ScrollView className="p-4 w-full">
         <Text className="text-2xl  font-bold mb-3 capitalize">
           <Text>{name}</Text> exercises
         </Text>
@@ -82,8 +87,9 @@ const Exercise = ({route, navigation}: ExerciseProps) => {
           numColumns={2}
           data={bodyPart}
           columnWrapperStyle={{justifyContent: 'space-between'}}
-          renderItem={({item}) => (
-            <>
+          renderItem={({item, index}) => (
+            <Animated.View
+              entering={FadeInDown.duration(200).delay(index * 100)}>
               <TouchableOpacity
                 style={{
                   width: widthPercentageToDP(44),
@@ -107,11 +113,11 @@ const Exercise = ({route, navigation}: ExerciseProps) => {
                 modalVisible={modalVisible}
                 item={item}
               />
-            </>
+            </Animated.View>
           )}
         />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
